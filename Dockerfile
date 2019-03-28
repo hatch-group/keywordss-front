@@ -2,13 +2,18 @@ FROM node:11.6.0
 
 WORKDIR /keywordss
 
+ADD ./src/ /keywordss/src/
+ADD ./package.json /keywordss/package.json
+ADD ./webpack.config.js /keywordss/webpack.config.js
+ADD ./.babelrc ./keywordss/.babelrc
 ADD ./index.html /keywordss/index.html
-ADD ./dist/bundle.js /keywordss/dist/bundle.js
-ADD ./image/ /keywordss/image/
+#ADD ./image/ /keywordss/image/
 
 RUN npm init -y
-RUN npm install -g http-server
+RUN cd /keywordss
+RUN npm install
+RUN npm run build
 
-CMD cd /keywordss/ && http-server -p 3000
+CMD http-server -p 3000 --cors 
 
 EXPOSE 3000
