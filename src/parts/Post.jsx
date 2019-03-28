@@ -6,17 +6,30 @@ class Post extends React.Component {
     super(props);
   }
 
+  showKeywords(keywords) {
+    return (
+      keywords.map(keyword => (
+        <p> { keyword } </p>
+      ))
+    );
+  };
+
   render() {
     const { post } = this.props;
     console.log(post);
     return (
-      <div className="item">
+      <div className="card">
         <div className="content">
-          <div className="postTitle">
+          <div className="card title">
             {post.title}
           </div>
           <div className="description">
-            {post.keyword}
+            <div>
+              使用したキーワード
+              <div>
+                {this.showKeywords(post.keyword)}
+              </div>
+            </div>
           </div>
         </div>
       </div>

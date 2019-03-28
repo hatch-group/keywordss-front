@@ -7,39 +7,9 @@ class Timeline extends React.Component {
 
   constructor(props){
     super(props);
+    const posts = this.dummyPosts();
     this.state = {
-      posts: [
-        {
-          id: 1,
-          title: "Encounter",
-          body: "地球という惑星にまだ隕石の嵐が降り続けていたとき、彼らは生命の発生工程の試験を繰り返していた。",
-          created: "YYYY-MM-DD",
-          updated: "YYYY-MM-DD",
-          keyword: ["遺伝子", "もがく", "きらびやかな"],
-          status: 1,
-          user_id: 1
-        },
-        {
-          id: 2,
-          title: "Encounter",
-          body: "地球という惑星にまだ隕石の嵐が降り続けていたとき、彼らは生命の発生工程の試験を繰り返していた。",
-          created: "YYYY-MM-DD",
-          updated: "YYYY-MM-DD",
-          keyword: ["遺伝子", "もがく", "きらびやかな"],
-          status: 1,
-          user_id: 1
-        },
-        {
-          id: 1,
-          title: "Encounter",
-          body: "地球という惑星にまだ隕石の嵐が降り続けていたとき、彼らは生命の発生工程の試験を繰り返していた。",
-          created: "YYYY-MM-DD",
-          updated: "YYYY-MM-DD",
-          keyword: ["遺伝子", "もがく", "きらびやかな"],
-          status: 1,
-          user_id: 1
-        }
-      ]
+      posts: posts
     };
   };
   
@@ -47,13 +17,32 @@ class Timeline extends React.Component {
     const { header, timeline } = this.props;
     header.set("text")("Timeline");
     timeline.on("posts").subscribe((posts) => {
-      console.log(posts);
       this.setState({ posts: posts });
     });
+    console.log(this.state.posts);
   }
 
+  // TODO: APIが実装できたら消す
+  dummyPosts() {
+    let posts = [];
+    for(let i = 0; i < 20; i++) {
+      posts.push(
+        {
+          id: 1,
+          title: "タイトル",
+          body: "地球という惑星にまだ隕石の嵐が降り続けていたとき、彼らは生命の発生工程の試験を繰り返していた。",
+          created: "yyyy-mm-dd",
+          updated: "yyyy-mm-dd",
+          keyword: ["遺伝子", "もがく", "きらびやかな"],
+          status: 1,
+          user_id: 1
+        }
+      );
+    }
+    return posts;
+  };
+
   posts() {
-    console.log(this.state.posts);
     return (
       this.state.posts.map(post => (
         <Post post={post}/>
@@ -64,7 +53,7 @@ class Timeline extends React.Component {
   render(){
     return (
       <div className="posts">
-        <div className="ui middle aligned selection list">
+        <div className="ui cards">
           { this.posts() }
         </div>
       </div>
