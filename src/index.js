@@ -1,6 +1,21 @@
-import * as React from "react";
-import * as ReactDOM from "react-dom";
-import { Hello } from "./View";
+import React from "react";
+import ReactDom from "react-dom";
+import { BrowserRouter } from "react-router-dom";
+import Store from "./Store";
 
-const view = React.createElement(Hello);
-ReactDOM.render(view, document.getElementById("root"));
+//router
+import App from "./App";
+
+class Root extends React.Component {
+    render() {
+        return (
+            <Store.Container>
+                <BrowserRouter>
+                    <App />
+                </BrowserRouter>
+            </Store.Container>
+        );
+    }
+}
+
+ReactDom.render(<Root />, document.getElementById("root"));
