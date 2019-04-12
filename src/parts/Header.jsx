@@ -1,4 +1,3 @@
-
 import React from "react";
 import Store from "../Store";
 // import * as actions from "../actions/Header";
@@ -9,11 +8,11 @@ class Header extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      text: "KeywordSS"
+      text: ""
     }
   }
 
-  componentDidMount(){
+  componentWillMount(){
     const { header } = this.props;
     header.on("text").subscribe((text) => {
       this.setState({ text: text });

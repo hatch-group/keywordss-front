@@ -4,6 +4,8 @@
 
 :root {
   --theme-color: #222;
+  --hover-theme-color: #444;
+  --active-theme-color: #666;
   --icon-color: #ddd;
   --icon-hover: #FFF;
   --icon-active: #fff;
@@ -19,7 +21,7 @@
   margin: 0 auto;
   text-align:center;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 30px 0;
+  padding: 25px 0;
 }
 
 /*********************************
@@ -53,7 +55,7 @@
 }
 
 .navIcon {
-  margin: 10px 30px;
+  margin: -5px 30px 5px 30px;
 }
 
 .navIcon > a {
@@ -62,4 +64,41 @@
 
 .navIcon > a:hover {
   color: var(--icon-hover);
+}
+
+.ui.input {
+  display: inline-block;
+  width: 80%;
+  padding: 10px;
+  border-color: #222;
+}
+
+.ui.input>input:focus {
+  border-color: var(--theme-color)!important;
+}
+
+.center {
+  position: relative;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+
+.fixHeight {
+  height: calc(100vh - 55px);
+}
+
+.ui.button {
+  display: block !important;
+  background-color: var(--theme-color) !important;
+  color: var(--icon-color) !important;
+  margin: 30px auto !important;
+}
+
+.ui.button:hover {
+  background-color: var(--hover-theme-color) !important;
+}
+
+.ui.button:active {
+  background-color: var(--active-theme-color) !important;
 }

@@ -8,7 +8,7 @@ class Timeline extends React.Component {
     super(props);
   }
   
-  componentDidMount(){
+  componentWillMount(){
     const { header } = this.props;
     header.set("text")("Timeline");
   }
