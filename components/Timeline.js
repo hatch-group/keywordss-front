@@ -18,8 +18,36 @@ const mapDispatchToProps = dispatch => ({
 
 class Timeline extends React.Component {
 
-  componentDidMount() {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isRefreshing: false,
+    };
+  }
+
+  componentWillMount() {
     this.props.updateTimeline(null, null);
+  }
+
+  renderTimeline = ({story}) => {
+    return (
+      <View>
+        <Text>
+          {story ? story.title : " "}
+        </Text>
+      </View>
+    )
+  }
+
+  onRefresh = () => {
+    console.log('refreshing');
+    this.setStete({isRefreshing: true})
+    this.fetchTimeline();
+  }
+
+  fetchTimeline = () => {
+    this.props.updateTimeline(null, null);
+    this.setStete({isRefreshing: false});
   }
 
   render() {
@@ -29,11 +57,9 @@ class Timeline extends React.Component {
         <FlatList
           data={this.props.stories}
           keyExtractor={(story) => story.id.toString()}
-          renderItem={({story}) => (
-            <View>
-              <Text> {story ? story.title : ""} </Text>
-            </View>
-          )}
+          renderItem={this.renderTimeline}
+          refreshing={this.state.isRefreshing}
+          onRefresh={() => this.onRefresh}
         />
       </View>
     );
