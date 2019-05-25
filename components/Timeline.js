@@ -25,41 +25,37 @@ class Timeline extends React.Component {
     };
   }
 
-  componentWillMount() {
-    this.props.updateTimeline(null, null);
-  }
-
-  renderTimeline = ({story}) => {
-    return (
-      <View>
-        <Text>
-          {story ? story.title : " "}
-        </Text>
-      </View>
-    )
-  }
-
-  onRefresh = () => {
-    console.log('refreshing');
-    this.setStete({isRefreshing: true})
+  componentDidMount() {
     this.fetchTimeline();
   }
 
-  fetchTimeline = () => {
+  renderTimeline = ({story}) => (
+      <Text>
+        {story ? story.title : 'null'}
+      </Text>
+  )
+
+  onRefresh() {
+    console.log('refreshing');
+    this.setState({isRefreshing: true});
+    this.fetchTimeline();
+  }
+
+  fetchTimeline() {
     this.props.updateTimeline(null, null);
-    this.setStete({isRefreshing: false});
+    console.log(this.props.stories);
+    this.setState({isRefreshing: false});
   }
 
   render() {
-    console.log(this.props.stories)
     return (
       <View>
         <FlatList
+          onRefresh={() => this.onRefresh()}
+          refreshing={this.state.isRefreshing}
           data={this.props.stories}
           keyExtractor={(story) => story.id.toString()}
           renderItem={this.renderTimeline}
-          refreshing={this.state.isRefreshing}
-          onRefresh={() => this.onRefresh}
         />
       </View>
     );
