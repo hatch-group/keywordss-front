@@ -7,7 +7,7 @@ const initialState = {
         created: "YYYY-MM-DD",
         updated: "YYYY-MM-DD",
         keyword: ["遺伝子", "もがく", "きらびやかな"],
-        status: 1,
+        s: 1,
         user_id: 1
     },
     {
@@ -17,7 +17,7 @@ const initialState = {
         created: "YYYY-MM-DD",
         updated: "YYYY-MM-DD",
         keyword: ["遺伝子", "もがく", "きらびやかな"],
-        status: 1,
+        s: 1,
         user_id: 2
     },
     {
@@ -27,7 +27,7 @@ const initialState = {
         created: "YYYY-MM-DD",
         updated: "YYYY-MM-DD",
         keyword: ["遺伝子", "もがく", "きらびやかな"],
-        status: 1,
+        s: 1,
         user_id: 3
     },
   ]

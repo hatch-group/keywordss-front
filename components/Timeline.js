@@ -1,20 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as actions from './actions/timelineAction';
+import * as timelineActions from './actions/timelineAction';
 import {
   Text,
   View,
-  FlatList,
+  TouchableOpacity,
 } from 'react-native';
 
-const mapStateToProps = state => ({
-  stories: state.timeline.stories,
-});
+function mapStateToProps(state) {
+  return {
+    stories: state.timeline.stories
+  }
+}
 
-const mapDispatchToProps = dispatch => ({
-    ...bindActionCreators(actions, dispatch),
-});
+function mapDispatchToProps(dispatch) {
+  return {
+    ...bindActionCreators(timelineActions, dispatch),
+  }
+}
 
 class Timeline extends React.Component {
 
@@ -25,15 +29,9 @@ class Timeline extends React.Component {
     };
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.fetchTimeline();
   }
-
-  renderTimeline = ({story}) => (
-      <Text>
-        {story ? story.title : 'null'}
-      </Text>
-  )
 
   onRefresh() {
     console.log('refreshing');
@@ -50,14 +48,16 @@ class Timeline extends React.Component {
   render() {
     return (
       <View>
-        <FlatList
-          onRefresh={() => this.onRefresh()}
-          refreshing={this.state.isRefreshing}
-          data={this.props.stories}
-          keyExtractor={(story) => story.id.toString()}
-          renderItem={this.renderTimeline}
-        />
-      </View>
+        {
+          this.props.stories.map((story, index) => (
+            <TouchableOpacity
+              key={index}
+            >
+              <Text> {story['title']} </Text>
+            </TouchableOpacity>
+          ))
+        }
+      </View> 
     );
   }
 }
